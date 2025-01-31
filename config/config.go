@@ -128,6 +128,9 @@ func (cfg Config) Merge(ocfg Config) Config {
 	if ocfg.HTTPStatusCodeWhitelist != nil {
 		cfg.HTTPStatusCodeWhitelist = mergeLists(cfg.HTTPStatusCodeWhitelist, ocfg.HTTPStatusCodeWhitelist)
 	}
+	if ocfg.Ignores != nil {
+		cfg.Ignores = mergeLists(cfg.Ignores, ocfg.Ignores)
+	}
 	return cfg
 }
 
@@ -143,6 +146,7 @@ type Config struct {
 	Initialisms             []string `toml:"initialisms"`
 	DotImportWhitelist      []string `toml:"dot_import_whitelist"`
 	HTTPStatusCodeWhitelist []string `toml:"http_status_code_whitelist"`
+	Ignores                 []string `toml:"ignores"`
 }
 
 func (c Config) String() string {

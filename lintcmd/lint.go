@@ -207,6 +207,7 @@ func (l *linter) lint(r *runner.Runner, cfg *packages.Config, patterns []string)
 			if err != nil {
 				return out, err
 			}
+			filtered = filterIgnoredFile(filtered, res.Config.Ignores)
 			// OPT move this code into the 'success' function.
 			for i, diag := range filtered {
 				a := l.analyzers[diag.Category]
@@ -265,6 +266,20 @@ func (l *linter) lint(r *runner.Runner, cfg *packages.Config, patterns []string)
 	}
 
 	return out, nil
+}
+
+func filterIgnoredFile(diagnostics []diagnostic, ignores []string) []diagnostic {
+	for i := range diagnostics {
+		diag := &diagnostics[i]
+
+		basename := filepath.Base(diag.Position.Filename)
+		for _, ignore := range ignores {
+			if m, _ := filepath.Match(ignore, basename); m {
+				diag.Severity = severityIgnored
+			}
+		}
+	}
+	return diagnostics
 }
 
 func filterIgnored(diagnostics []diagnostic, res runner.ResultData, allowedAnalyzers map[string]bool) ([]diagnostic, error) {
