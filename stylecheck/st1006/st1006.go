@@ -2,6 +2,7 @@ package st1006
 
 import (
 	"go/types"
+	"strings"
 
 	"honnef.co/go/tools/analysis/facts/generated"
 	"honnef.co/go/tools/analysis/lint"
@@ -54,9 +55,17 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				}
 				if recv.Name() == "self" || recv.Name() == "this" {
 					report.Report(pass, recv, `receiver name should be a reflection of its identity; don't use generic names such as "this" or "self"`, report.FilterGenerated())
+					continue
 				}
 				if recv.Name() == "_" {
 					report.Report(pass, recv, "receiver name should not be an underscore, omit the name if it is unused", report.FilterGenerated())
+					continue
+				}
+
+				if len(recv.Name()) >= 1 {
+					if !strings.EqualFold(recv.Name()[0:1], T.Name()[0:1]) {
+						report.Report(pass, recv, "receiver name should use the first letter of its type", report.FilterGenerated())
+					}
 				}
 			}
 		}
