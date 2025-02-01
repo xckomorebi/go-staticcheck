@@ -58,7 +58,7 @@ func run(pass *analysis.Pass) (any, error) {
 						continue
 					}
 					value := vspec.Values[i]
-					if value.(*ast.BasicLit).Value != funcName {
+					if value.(*ast.BasicLit).Value != "\""+funcName+"\"" {
 						pass.Reportf(value.Pos(), "const mName should use function name")
 					}
 				}
