@@ -78,6 +78,8 @@ func main() {
 		catDir = "stylecheck"
 	case "QF":
 		catDir = "quickfix"
+	case "CS":
+		catDir = "customized"
 	default:
 		log.Fatalf("unknown check prefix %q", prefix)
 	}
@@ -107,7 +109,7 @@ func main() {
 
 	writeFile(dst, b)
 
-	testdata := filepath.Join(dir, "testdata", "src", "example.com", "pkg")
+	testdata := filepath.Join(dir, "testdata", "go1.0", "pkg")
 	mkdirp(testdata)
 	writeFile(filepath.Join(testdata, "pkg.go"), []byte("package pkg\n"))
 

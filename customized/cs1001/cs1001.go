@@ -1,4 +1,4 @@
-package st1025
+package cs1001
 
 import (
 	"go/ast"

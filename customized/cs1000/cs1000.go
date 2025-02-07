@@ -1,4 +1,4 @@
-package st1024
+package cs1000
 
 import (
 	"go/ast"
@@ -13,7 +13,7 @@ import (
 
 var SCAnalyzer = lint.InitializeAnalyzer(&lint.Analyzer{
 	Analyzer: &analysis.Analyzer{
-		Name:     "ST1024",
+		Name:     "CS1000",
 		Run:      run,
 		Requires: []*analysis.Analyzer{inspect.Analyzer},
 	},

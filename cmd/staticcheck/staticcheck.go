@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"honnef.co/go/tools/customized"
 	"honnef.co/go/tools/lintcmd"
 	"honnef.co/go/tools/lintcmd/version"
 	"honnef.co/go/tools/quickfix"
@@ -27,6 +28,7 @@ func main() {
 	cmd.AddAnalyzers(simple.Analyzers...)
 	cmd.AddAnalyzers(staticcheck.Analyzers...)
 	cmd.AddAnalyzers(stylecheck.Analyzers...)
+	cmd.AddAnalyzers(customized.Analyzers...)
 	cmd.AddAnalyzers(unused.Analyzer)
 
 	if *qf {

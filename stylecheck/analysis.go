@@ -22,8 +22,6 @@ import (
 	"honnef.co/go/tools/stylecheck/st1021"
 	"honnef.co/go/tools/stylecheck/st1022"
 	"honnef.co/go/tools/stylecheck/st1023"
-	"honnef.co/go/tools/stylecheck/st1024"
-	"honnef.co/go/tools/stylecheck/st1025"
 )
 
 var Analyzers = []*lint.Analyzer{
@@ -45,6 +43,4 @@ var Analyzers = []*lint.Analyzer{
 	st1021.SCAnalyzer,
 	st1022.SCAnalyzer,
 	st1023.SCAnalyzer,
-	st1024.SCAnalyzer,
-	st1025.SCAnalyzer,
 }
